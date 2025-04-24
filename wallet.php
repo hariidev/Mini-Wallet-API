@@ -29,6 +29,15 @@ function deposit($userId, $amount) {
     return ['balance' => $wallet[$userId]['balance']];
 }
 
+function getBalance($userId) {
+    $wallet = loadWallet();
+    if (!isset($wallet[$userId])) {
+        return ['error' => 'User not found.'];
+    }
+    return ['balance' => $wallet[$userId]['balance']];
+}
+
+
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestUri = $_SERVER['REQUEST_URI'];
 parse_str(parse_url($requestUri, PHP_URL_QUERY), $queryParams);
@@ -39,6 +48,9 @@ if ($requestMethod === 'POST' && strpos($requestUri, '/deposit') !== false) {
     $userId = $queryParams['user_id'] ?? null;
     $amount = isset($queryParams['amount']) ? floatval($queryParams['amount']) : 0;
     echo json_encode(deposit($userId, $amount));
+} elseif ($requestMethod === 'GET' && strpos($requestUri, '/balance') !== false) {
+    $userId = $queryParams['user_id'] ?? null;
+    echo json_encode(getBalance($userId));
 } else {
     http_response_code(404);
     echo json_encode(['error' => 'Endpoint not found.']);
