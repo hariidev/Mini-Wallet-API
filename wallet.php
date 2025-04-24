@@ -37,6 +37,22 @@ function getBalance($userId) {
     return ['balance' => $wallet[$userId]['balance']];
 }
 
+function withdraw($userId, $amount) {
+    $wallet = loadWallet();
+    if ($amount <= 0) {
+        return ['error' => 'Amount must be positive.'];
+    }
+    if (!isset($wallet[$userId])) {
+        return ['error' => 'User not found.'];
+    }
+    if ($wallet[$userId]['balance'] < $amount) {
+        return ['error' => 'Insufficient funds.'];
+    }
+    $wallet[$userId]['balance'] -= $amount;
+    $wallet[$userId]['transactions'][] = ['type' => 'withdraw', 'amount' => $amount, 'date' => date('Y-m-d H:i:s')];
+    saveWallet($wallet);
+    return ['balance' => $wallet[$userId]['balance']];
+}
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestUri = $_SERVER['REQUEST_URI'];
@@ -51,6 +67,10 @@ if ($requestMethod === 'POST' && strpos($requestUri, '/deposit') !== false) {
 } elseif ($requestMethod === 'GET' && strpos($requestUri, '/balance') !== false) {
     $userId = $queryParams['user_id'] ?? null;
     echo json_encode(getBalance($userId));
+} elseif ($requestMethod === 'POST' && strpos($requestUri, '/withdraw') !== false) {
+    $userId = $queryParams['user_id'] ?? null;
+    $amount = isset($queryParams['amount']) ? floatval($queryParams['amount']) : 0;
+    echo json_encode(withdraw($userId, $amount));
 } else {
     http_response_code(404);
     echo json_encode(['error' => 'Endpoint not found.']);
