@@ -1,6 +1,6 @@
 💸 Simple PHP Wallet API
 
-A lightweight wallet API built using pure PHP (no frameworks), using file-based JSON storage.  
+A lightweight wallet API built using PHP, using file-based JSON storage.  
 Supports deposit, withdrawal, balance inquiry, and transaction history.
 
 
