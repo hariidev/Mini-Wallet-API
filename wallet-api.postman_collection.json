@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "b7d3ec9d-cfaf-4232-bf3b-71e9bd3ff711",
+		"name": "wallet-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22938108"
+	},
+	"item": [
+		{
+			"name": "Deposit",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "user1",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/deposit?user_id=user1&amount=150",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"deposit"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "user1"
+						},
+						{
+							"key": "amount",
+							"value": "150"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Balance",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/balance?user_id=user1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"balance"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "user1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Withdraw",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/withdraw?user_id=user1&amount=500",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"withdraw"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "user1"
+						},
+						{
+							"key": "amount",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/transactions?user_id=user1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "user1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
