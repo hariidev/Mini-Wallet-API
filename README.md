@@ -55,3 +55,28 @@ Storage is kept in a local file named wallet.json.
 Each request is stateless; no sessions or auth are implemented.
 
 Input must be valid numbers and non-negative for amounts.
+
+🧪 Testing via Postman
+
+✅ 1. Deposit – POST /deposit
+
+Method: POST
+URL:    http://localhost:8000/deposit?user_id=user1&amount=100
+
+✅ 2. Withdraw – POST /withdraw
+
+Method: POST
+URL:    http://localhost:8000/withdraw?user_id=user1&amount=50
+
+✅ 3. Check Balance – GET /balance
+
+Method: GET
+URL:    http://localhost:8000/balance?user_id=user1
+
+✅ 4. View Transactions – GET /transactions
+
+Method: GET
+URL:    http://localhost:8000/transactions?user_id=user1
+
+
+Postman collection file is added in the source code.
