@@ -79,4 +79,4 @@ Method: GET
 URL:    http://localhost:8000/transactions?user_id=user1
 
 
-Postman collection file is added in the source code.
+Postman Collection JSON file is added in the source code.
