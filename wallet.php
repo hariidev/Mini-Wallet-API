@@ -37,6 +37,14 @@ function getBalance($userId) {
     return ['balance' => $wallet[$userId]['balance']];
 }
 
+function getTransactions($userId) {
+    $wallet = loadWallet();
+    if (!isset($wallet[$userId])) {
+        return ['error' => 'User not found.'];
+    }
+    return ['transactions' => $wallet[$userId]['transactions']];
+}
+
 function withdraw($userId, $amount) {
     $wallet = loadWallet();
     if ($amount <= 0) {
@@ -71,6 +79,9 @@ if ($requestMethod === 'POST' && strpos($requestUri, '/deposit') !== false) {
     $userId = $queryParams['user_id'] ?? null;
     $amount = isset($queryParams['amount']) ? floatval($queryParams['amount']) : 0;
     echo json_encode(withdraw($userId, $amount));
+} elseif ($requestMethod === 'GET' && strpos($requestUri, '/transactions') !== false) {
+    $userId = $queryParams['user_id'] ?? null;
+    echo json_encode(getTransactions($userId));
 } else {
     http_response_code(404);
     echo json_encode(['error' => 'Endpoint not found.']);
